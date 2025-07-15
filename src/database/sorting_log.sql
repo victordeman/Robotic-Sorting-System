@@ -1,1 +1,6 @@
-CREATE TABLE SortingLog (id INTEGER PRIMARY KEY AUTOINCREMENT, object_type TEXT, timestamp DATETIME);
+CREATE TABLE IF NOT EXISTS SortingLog (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    timestamp DATETIME,
+    object_type TEXT,
+    status TEXT
+);CREATE TABLE SortingLog (id INTEGER PRIMARY KEY AUTOINCREMENT, object_type TEXT, timestamp DATETIME);
