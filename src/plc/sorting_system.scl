@@ -1,1 +1,42 @@
-FUNCTION_BLOCK "SortingLogic"\nEND_FUNCTION_BLOCK
+FUNCTION_BLOCK "SortingLogic"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+
+VAR_INPUT
+    ObjectDetected : BOOL;      // Signal from vision system
+    ObjectType : INT;           // 1 = Red, 2 = Blue
+END_VAR
+
+VAR_OUTPUT
+    MoveRobot : BOOL;           // Command to move robotic arm
+    TargetBin : INT;            // 1 = Bin1 (Red), 2 = Bin2 (Blue)
+END_VAR
+
+VAR
+    FaultDetected : BOOL;       // Internal fault flag
+END_VAR
+
+BEGIN
+    // Initialize outputs
+    MoveRobot := FALSE;
+    TargetBin := 0;
+
+    // Check for object detection
+    IF ObjectDetected THEN
+        IF FaultDetected THEN
+            MoveRobot := FALSE;  // Stop robot on fault
+        ELSE
+            CASE ObjectType OF
+                1:  // Red object
+                    TargetBin := 1;
+                    MoveRobot := TRUE;
+                2:  // Blue object
+                    TargetBin := 2;
+                    MoveRobot := TRUE;
+                ELSE
+                    TargetBin := 0;  // Invalid type
+                    MoveRobot := FALSE;
+            END_CASE;
+        END_IF;
+    END_IF;
+END_FUNCTION_BLOCK
