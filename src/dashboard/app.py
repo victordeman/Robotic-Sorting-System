@@ -18,16 +18,16 @@ BROKER = "broker.hivemq.com"
 PORT = 1883
 TOPIC = "sorting/status"
 
-# Database connection
 def get_db_connection():
-    conn = sqlite3.connect("src/database/sorting_log.db")
+    db_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../database/sorting_log.db'))
+    conn = sqlite3.connect(db_path)
     conn.row_factory = sqlite3.Row
     return conn
 
-# Log to database
 def log_to_db(object_type):
     conn = get_db_connection()
-    conn.execute("INSERT INTO SortingLog (object_type, timestamp) VALUES (?, CURRENT_TIMESTAMP)", (object_type,))
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO SortingLog (timestamp, object_type, status) VALUES (datetime('now'), ?, 'Detected')", (object_type,))
     conn.commit()
     conn.close()
 
