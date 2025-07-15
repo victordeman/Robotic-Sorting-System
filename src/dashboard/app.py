@@ -68,14 +68,15 @@ st.write(f"**Status**: {st.session_state['status']}")
 st.write(f"**Current Object**: {st.session_state['object_type']}")
 
 # Vision system integration
-st.subheader("Vision System")
-image_path = st.text_input("Enter image path", "src/vision/sample_images/red_block.jpg")
 if st.button("Detect Object"):
-    result = detect_object(image_path)
-    object_type = {1: "Red", 2: "Blue", 0: "Unknown"}[result]
-    st.write(f"Detected: {object_type}")
-    client.publish(TOPIC, json.dumps({"status": "Running", "object_type": object_type}))
-    log_to_db(object_type)
+    if image_path:
+        result = detect_object(image_path)
+        color_map = {1: "Red", 2: "Blue", 0: "Unknown"}
+        object_type = color_map.get(result, "Unknown")
+        st.write(f"Detected: {object_type}")
+        log_to_db(result)  # Pass integer to log_to_db, which maps it
+    else:
+        st.write("Please enter an image path.")
 
 # Sorting log
 st.subheader("Sorting Log")
