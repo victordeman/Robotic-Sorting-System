@@ -1,0 +1,1 @@
+streamlit==1.28.0\nopencv-python==4.8.1\npaho-mqtt==1.6.1

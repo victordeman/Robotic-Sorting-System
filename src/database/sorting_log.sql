@@ -1,0 +1,1 @@
+CREATE TABLE SortingLog (id INTEGER PRIMARY KEY AUTOINCREMENT, object_type TEXT, timestamp DATETIME);
