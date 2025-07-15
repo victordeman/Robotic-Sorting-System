@@ -1,11 +1,17 @@
 # Streamlit dashboard for Robotic Sorting System
 # Überwachungsschnittstelle für das Robotersortiersystem
+# Streamlit dashboard for Robotic Sorting System
+# Überwachungsschnittstelle für das Robotersortiersystem
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../..')))
 import streamlit as st
 import sqlite3
 import paho.mqtt.client as mqtt
 import json
 import time
 from src.vision.object_detection import detect_object  # Import vision function
+# ... rest of the code unchanged ...
 
 # MQTT setup
 BROKER = "broker.hivemq.com"
