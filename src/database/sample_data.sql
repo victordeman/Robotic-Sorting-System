@@ -4,7 +4,6 @@ INSERT INTO SortingLog (timestamp, object_type, status) VALUES
 ('2025-07-15 10:02:00', 'None', 'Fault');
 
 
-
 #--For testing. "Take Note"
 
 #---Apply the sample data:
