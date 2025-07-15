@@ -1,0 +1,5 @@
+streamlit==1.28.0
+opencv-python==4.8.1.78
+paho-mqtt==1.6.1
+numpy==1.22.1
+# tensorflow==2.12.0  # Optional: for AI-based object classification
